@@ -6,18 +6,18 @@
     }
 
     function makeTabs(node) {
-        let selected = node.querySelector('.section__tab_active').dataset.id;
+        let selectedElem = node.querySelector('.section__tab_active')
+        let selectedId = selectedElem.dataset.id;
         const tabs = node.querySelectorAll('.section__tab');
         const list = Array.from(tabs).map(node => node.dataset.id);
         const select = node.querySelector('.section__select');
 
-        function selectTab(newId) {
+        function selectTab(newId, elem, event) {
             const newTab = node.querySelector(`.section__tab[data-id=${newId}]`);
             const newPanel = node.querySelector(`.section__panel[data-id=${newId}]`);
-            const oldTab = node.querySelector('.section__tab_active');
+            const oldTab = elem || node.querySelector('.section__tab_active');
             const oldPanel = node.querySelector('.section__panel:not(.section__panel_hidden)');
-
-            selected = newId;
+            selectedId = newId;
 
             oldTab.classList.remove('section__tab_active');
             oldTab.setAttribute('aria-selected', 'false');
@@ -51,21 +51,13 @@
                 return;
             }
 
-            let index = list.indexOf(selected);
-            if (event.which === 37) {
-                // left
-                --index;
-            } else if (event.which === 39) {
-                // right
-                ++index;
-            } else if (event.which === 36) {
-                // home
-                index = 0;
-            } else if (event.which === 35) {
-                // end
-                index = list.length - 1;
-            } else {
-                return;
+            let index = list.indexOf(selectedId);
+            switch (event.which) {
+                case 37: --index; break;
+                case 39: ++index; break;
+                case 36: index = 0; break;
+                case 35: list.length - 1; break;
+                default: return
             }
 
             index = index >= list.length ? 0 : list.length - 1
@@ -78,12 +70,12 @@
     function makeMenu(node) {
         let expanded = false;
         const links = document.querySelector('.header__links');
-        const headerMenuText = node.querySelector('.header__menu-text')
+        // const headerMenuText = node.querySelector('.header__menu-text')
 
         node.addEventListener('click', () => {
             expanded = !expanded;
             node.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-            headerMenuText.textContent = expanded ? 'Закрыть меню' : 'Открыть меню';
+            // headerMenuText.textContent = expanded ? 'Закрыть меню' : 'Открыть меню';
             links.classList.toggle('header__links_opened', expanded);
             links.classList.add('header__links-toggled');
         });
