@@ -68,11 +68,7 @@
                 return;
             }
 
-            if (index >= list.length) {
-                index = 0;
-            } else if (index < 0) {
-                index = list.length - 1;
-            }
+            index = index >= list.length ? 0 : list.length - 1
 
             selectTab(list[index]);
             event.preventDefault();
