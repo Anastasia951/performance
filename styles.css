@@ -96,6 +96,7 @@ body {
 
   .header__links-toggled {
     display: flex;
+    will-change: opacity, transform;
     animation: hideMenu 0.3s ease-in-out 1;
     animation-fill-mode: both;
   }
@@ -103,6 +104,7 @@ body {
   .header__links_opened {
     display: flex;
     visibility: visible;
+    will-change: opacity, transform;
     animation: showMenu 0.3s ease-in-out 1;
     animation-fill-mode: both;
   }
@@ -110,23 +112,23 @@ body {
 
 @keyframes showMenu {
   from {
-    transform: translateY(-1rem);
+    transform: translate3d(0, -1rem, 0);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes hideMenu {
   from {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
     visibility: visible;
   }
   to {
-    transform: translateY(-1rem);
+    transform: translate3d(0, -1rem, 0);
     opacity: 0;
     visibility: hidden;
   }
@@ -135,6 +137,7 @@ body {
 .header__link {
   font-weight: bold;
   opacity: 0.6;
+  will-change: opacity;
   transition: opacity 0.15s ease-in-out;
   text-decoration: none;
   color: #333333;
@@ -237,6 +240,7 @@ main{
   background: #f7f7f7;
   border-radius: 1024px;
   cursor: pointer;
+  will-change: background-color, box-shadow;
   transition: 0.25s ease-in-out;
   transition-property: background-color, box-shadow;
 }
@@ -403,6 +407,7 @@ main{
   border: none;
   background: #f7f7f7;
   text-align: left;
+  will-change: background-color, box-shadow;
   transition: 0.25s ease-in-out;
   transition-property: background-color, box-shadow;
   cursor: pointer;
@@ -528,6 +533,7 @@ footer ul {
 .footer__link {
   font-size: 0.75rem;
   color: #858585;
+  will-change: opacity;
   transition: opacity 0.15s ease-in-out;
   text-decoration: none;
 }
